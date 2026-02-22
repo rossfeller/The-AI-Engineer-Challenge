@@ -1,0 +1,56 @@
+/**
+ * Global styles — NES Tetris (Nintendo) inspired palette and typography.
+ * High contrast: no white text on white background; boxes sized to content.
+ */
+:root {
+  /* NES Tetris–style palette */
+  --nes-dark: #212529;
+  --nes-bg: #0f3460;
+  --nes-panel: #16213e;
+  --nes-border: #1a1a2e;
+  --nes-border-light: #2d4059;
+  --nes-text: #eaeaea;
+  --nes-text-dim: #a0a0a0;
+  --nes-accent-cyan: #00d9ff;
+  --nes-accent-yellow: #f9d923;
+  --nes-accent-green: #4ade80;
+  --nes-accent-red: #e63946;
+  --nes-block: #3d5a80;
+  --nes-highlight: #ee6c4d;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--nes-bg);
+  color: var(--nes-text);
+  font-family: var(--font-press-start), "Press Start 2P", "Courier New", monospace;
+}
+
+/* Pixel-style font; fallback to system monospace if not loaded */
+a {
+  color: var(--nes-accent-cyan);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}

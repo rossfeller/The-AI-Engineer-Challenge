@@ -1,0 +1,186 @@
+/**
+ * NES Tetris–inspired layout and components.
+ * Boxes grow to fit content; high contrast (no white on white).
+ */
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--nes-bg);
+}
+
+.frame {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--nes-panel);
+  border: 4px solid var(--nes-border-light);
+  box-shadow:
+    inset 2px 2px 0 var(--nes-border),
+    4px 4px 0 var(--nes-dark);
+  padding: 1rem;
+}
+
+.header {
+  text-align: center;
+  padding: 0.75rem 0;
+  border-bottom: 3px solid var(--nes-border-light);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1rem;
+  color: var(--nes-accent-cyan);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  font-size: 0.5rem;
+  color: var(--nes-text-dim);
+}
+
+.chatArea {
+  min-height: 240px;
+  max-height: 60vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.placeholder {
+  font-size: 0.5rem;
+  color: var(--nes-text-dim);
+  line-height: 1.6;
+  padding: 0.5rem;
+}
+
+.bubbleUser,
+.bubbleAssistant {
+  align-self: flex-start;
+  max-width: 95%;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--nes-border-light);
+  border-radius: 0;
+  background: var(--nes-block);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.bubbleAssistant {
+  align-self: flex-start;
+  border-color: var(--nes-accent-cyan);
+  background: var(--nes-panel);
+}
+
+.bubbleUser {
+  align-self: flex-end;
+  border-color: var(--nes-accent-yellow);
+  background: var(--nes-dark);
+}
+
+.bubbleLabel {
+  display: block;
+  font-size: 0.4rem;
+  color: var(--nes-text-dim);
+  margin-bottom: 0.25rem;
+}
+
+.bubbleAssistant .bubbleLabel {
+  color: var(--nes-accent-cyan);
+}
+
+.bubbleUser .bubbleLabel {
+  color: var(--nes-accent-yellow);
+}
+
+.bubbleText {
+  font-size: 0.5rem;
+  line-height: 1.6;
+  color: var(--nes-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.errorBox {
+  align-self: flex-start;
+  max-width: 95%;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--nes-accent-red);
+  background: var(--nes-dark);
+}
+
+.errorLabel {
+  display: block;
+  font-size: 0.4rem;
+  color: var(--nes-accent-red);
+  margin-bottom: 0.25rem;
+}
+
+.errorText {
+  font-size: 0.5rem;
+  line-height: 1.6;
+  color: var(--nes-text);
+}
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.input {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.5rem;
+  background: var(--nes-dark);
+  border: 2px solid var(--nes-border-light);
+  color: var(--nes-text);
+}
+
+.input::placeholder {
+  color: var(--nes-text-dim);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--nes-accent-cyan);
+}
+
+.input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.button {
+  padding: 0.6rem 1rem;
+  font-size: 0.5rem;
+  background: var(--nes-accent-cyan);
+  color: var(--nes-dark);
+  border: 2px solid var(--nes-border-light);
+  box-shadow: 2px 2px 0 var(--nes-dark);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--nes-accent-yellow);
+  color: var(--nes-dark);
+}
+
+.button:active:not(:disabled) {
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
