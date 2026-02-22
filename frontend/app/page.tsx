@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { sendChatMessage } from "@/lib/api";
+import { streamChatMessage } from "@/lib/api";
 import styles from "./page.module.css";
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -10,6 +10,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [streamingContent, setStreamingContent] = useState("");
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -19,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, streamingContent]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -28,17 +29,21 @@ export default function Home() {
 
     setInput("");
     setError(null);
+    setStreamingContent("");
     setMessages((prev) => [...prev, { role: "user", content: text }]);
     setLoading(true);
 
     try {
-      const { reply } = await sendChatMessage(text);
-      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+      const fullReply = await streamChatMessage(text, (token) => {
+        setStreamingContent((prev) => prev + token);
+      });
+      setMessages((prev) => [...prev, { role: "assistant", content: fullReply }]);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Something went wrong";
       setError(message);
     } finally {
       setLoading(false);
+      setStreamingContent("");
     }
   }
 
@@ -51,7 +56,7 @@ export default function Home() {
         </header>
 
         <div className={styles.chatArea}>
-          {messages.length === 0 && !error && (
+          {messages.length === 0 && !error && !streamingContent && (
             <p className={styles.placeholder}>
               Type a message and press ENTER. Ask about stress, motivation, habits, or confidence.
             </p>
@@ -68,7 +73,17 @@ export default function Home() {
           {loading && (
             <div className={styles.bubbleAssistant}>
               <span className={styles.bubbleLabel}>COACH</span>
-              <p className={styles.bubbleText}>...</p>
+              {streamingContent ? (
+                <p className={styles.bubbleText}>{streamingContent}</p>
+              ) : (
+                <p className={styles.bubbleText}>
+                  <span className={styles.loadingDots}>
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                  </span>
+                </p>
+              )}
             </div>
           )}
           {error && (

@@ -68,6 +68,14 @@ lsof -ti:8000 | xargs kill -9
 
 The chat endpoint uses OpenAI's GPT-5 model with a supportive mental coach system prompt to provide helpful responses.
 
+### Chat Stream Endpoint (SSE)
+- **URL**: `/api/chat/stream`
+- **Method**: POST
+- **Request Body**: Same as Chat Endpoint: `{"message": "string"}`
+- **Response**: `text/event-stream`. Each event is a JSON line: `data: {"content": "..."}` for each token, or `data: {"error": "..."}` on failure.
+
+The frontend uses this endpoint to show the coach's reply as it is generated.
+
 ### Root Endpoint
 - **URL**: `/`
 - **Method**: GET
