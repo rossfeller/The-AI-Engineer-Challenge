@@ -21,8 +21,8 @@ app.add_middleware(
 )
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-# Use a valid OpenAI model (gpt-5 does not exist; gpt-4o, gpt-4o-mini, gpt-3.5-turbo are valid)
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+# Override with OPENAI_MODEL env var if needed
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5-mini")
 
 class ChatRequest(BaseModel):
     message: str
