@@ -4,8 +4,30 @@ Next.js frontend for the Mental Coach app. It talks to the FastAPI backend and i
 
 ## Prerequisites
 
-- Node.js 18+
+- **Node.js 18+** (which includes `npm`). If you see `zsh: command not found: npm`, install or enable Node (see below).
 - Backend API running (see repo root `api/README.md`). Default: `http://localhost:8000`.
+
+### Installing Node.js and npm
+
+You need Node.js (and npm) on your PATH. Choose one option:
+
+- **Homebrew (macOS):**
+  ```bash
+  brew install node
+  ```
+  Then open a **new terminal** and run `npm --version` to confirm.
+
+- **Official installer:**  
+  Download the LTS version from [nodejs.org](https://nodejs.org/) and run the installer. Restart your terminal afterward.
+
+- **If you use nvm (Node Version Manager):**
+  ```bash
+  nvm install 20
+  nvm use 20
+  ```
+  Or ensure nvm is loaded in your shell (e.g. add the nvm lines to `~/.zshrc` and open a new terminal).
+
+After `npm` is available, continue with **Run locally** below.
 
 ## Run locally
 
