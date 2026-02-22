@@ -1,12 +1,21 @@
 /**
- * Fetches the backend API base URL.
- * Uses NEXT_PUBLIC_API_URL when set (e.g. on Vercel), otherwise defaults to local backend.
+ * Backend API base URL.
+ * - NEXT_PUBLIC_API_URL set → use it.
+ * - On localhost (browser or dev server) → http://localhost:8000 for local backend.
+ * - On production (e.g. Vercel) → "" so /api/* is same-origin (deployed backend).
  */
 export function getApiBaseUrl(): string {
-  if (typeof window !== "undefined") {
-    return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  if (url !== undefined && url !== "") {
+    return url;
   }
-  return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  if (typeof window !== "undefined" && window.location?.hostname === "localhost") {
+    return "http://localhost:8000";
+  }
+  if (typeof process !== "undefined" && process.env?.NODE_ENV === "development") {
+    return "http://localhost:8000";
+  }
+  return "";
 }
 
 export interface ChatResponse {
