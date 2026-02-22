@@ -21,6 +21,8 @@ app.add_middleware(
 )
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Use a valid OpenAI model (gpt-5 does not exist; gpt-4o, gpt-4o-mini, gpt-3.5-turbo are valid)
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
 class ChatRequest(BaseModel):
     message: str
@@ -37,7 +39,7 @@ def chat(request: ChatRequest):
     try:
         user_message = request.message
         response = client.chat.completions.create(
-            model="gpt-5",
+            model=OPENAI_MODEL,
             messages=[
                 {"role": "system", "content": "You are a supportive mental coach."},
                 {"role": "user", "content": user_message}
@@ -55,7 +57,7 @@ def _stream_chat(message: str):
         return
     try:
         stream = client.chat.completions.create(
-            model="gpt-5",
+            model=OPENAI_MODEL,
             messages=[
                 {"role": "system", "content": "You are a supportive mental coach."},
                 {"role": "user", "content": message},
