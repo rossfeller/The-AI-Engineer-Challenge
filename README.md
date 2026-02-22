@@ -161,6 +161,8 @@ While it is a bit counter-intuitive to set things up before jumping into vibe-co
 
 6. Once the build is completed - head to the provided link and try out your app!
 
+7. **Vercel project setup:** In the Vercel dashboard → your project → **Settings** → **General** → set **Root Directory** to `frontend` and save. Add **OPENAI_API_KEY** under **Settings** → **Environment Variables** so chat works. Redeploy. The backend lives in `frontend/api/`; if you edit the root `api/`, run `npm run sync-api` from the `frontend/` folder before committing.
+
 > NOTE: Remember, if you run into any errors - ask Cursor to help you fix them!
 
 </details>
