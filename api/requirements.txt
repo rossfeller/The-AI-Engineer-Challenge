@@ -1,0 +1,5 @@
+# Repo root api/ for Vercel Python serverless (Mangum = ASGI adapter)
+fastapi>=0.121.2
+mangum>=0.17.0
+openai>=1.0.0
+python-dotenv>=1.0.0

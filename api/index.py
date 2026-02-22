@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import OpenAI
+from mangum import Mangum
 import os
 import json
 from dotenv import load_dotenv
@@ -82,3 +83,7 @@ def chat_stream(request: ChatRequest):
             "X-Accel-Buffering": "no",
         },
     )
+
+
+# Vercel serverless entrypoint (ASGI adapter)
+handler = Mangum(app, lifespan="off")

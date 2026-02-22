@@ -1,4 +1,0 @@
-# Vercel Python serverless (no uvicorn)
-fastapi>=0.121.2
-openai>=1.0.0
-python-dotenv>=1.0.0
